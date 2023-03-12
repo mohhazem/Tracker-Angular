@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
-import {Observable,of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {HttpClient,HttpHeaders} from '@angular/common/http'
-import { TASKS } from '../mock-tasks';
 import { Task } from '../Task';
-import { FormRecord } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  private database='http://localhost:3000/takservices';
-  constructor() { }
+  private database='http://localhost:5000/tasks';
+  constructor(private http:HttpClient) { }
 
   getTasks() : Observable<Task[]>{
     
-    const tasks =  of(TASKS);
-    return tasks;
+    //console.log("workingggggggggggggggggggg")
+    return this.http.get<Task[]>(this.database)
   }
 }
